@@ -1,0 +1,53 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+bool feasible(int mid , int arr[] , int n , int k ){
+
+       int pos = arr[0] ; int element = 1 ;
+                                       
+       for(int i =0 ; i<n ; i++){
+           if(arr[i]-pos >= mid){
+               pos = arr[i];  
+               element++;
+
+               if(element == k){
+                   return true;
+               }
+           }
+       }     
+       return false ;
+} 
+
+
+int largestmindistance(int arr[] , int n , int k ){
+
+    sort(arr, arr+n);
+
+     int result = -1 ;  e
+     int left = 1 ; int right = arr[n-1];
+
+     while(left<right){
+         int mid = (left+right)/2;
+
+         if(feasible(mid , arr , n , k )){
+                 result = max(result , mid);
+                 left = mid+1;                  
+
+         }
+
+         right = mid ; 
+
+     }
+     return result;
+}
+int main(){
+int arr[] = {1,2,8,4,9};
+int n = 5 ; 
+int k = 3 ; 
+
+cout<<"Largest min distance is : "<<largestmindistance(arr, n , k );
+cout<<endl ;
+
+return 0;
+ }
